@@ -1,3 +1,3 @@
-﻿# QuizApp
+﻿# Juego de preguntas
 
 
