@@ -1,22 +1,19 @@
 ﻿var express = require('express');
 var router = express.Router();
+var quizController = require('../controllers/quiz_controller');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Quiz' });
 });
 
 router.get('/author', function (req, res) {
     res.render('creditos', { author: 'Aurelio García' });
 });
 
-router.get('/quizes', function (req, res) {
-    res.render('quizes/question', { pregunta: 'Aún sin implementar' });
-});
+router.get('/quizes',  quizController.question);
 
-router.get('/answer', function (req, res) {
-    res.render('quizes/answer', { resultado: 'Aún sin implementar' });
-});
+router.get('/answer', quizController.answer);
 
 
 module.exports = router;
