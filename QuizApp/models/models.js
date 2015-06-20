@@ -1,9 +1,35 @@
 ﻿var path = require('path');
+// Recabamos todos los datos de inicialización del tipo de BBDD
+// de las variables de entorno (fichero '.env' en local), que en
+// local tendrán un valor (SQLite) distinto de remoto (PostgreSQL)
+// NOTA: El archivo '.env' solo funciona con 'foreman', si se desea
+// usar 'nodeJS' habrá que declarar las variables de entorno en el SO
+// PosqtgreSQL DATABASE_URL = postgres://user:passwd@host:port/database
+// SQLite      DATABASE_URL = sqlite://:@:/
+var url = (process.env.DATABASE_URL || 'sqlite://:@:/').match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+var DB_NAME = (url[6] || null);
+var user = (url[2] || null);
+var pwd = (url[3] || null);
+var protocol = (url[1] || null);
+var dialect = protocol;
+var port = (url[5] || null);
+var host = (url[4] || null);
+var storage = process.env.DATABASE_STORAGE || 'quiz.sqlite';
+
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize(null, null, null,
-    { dialect: 'sqlite', storage: 'Quiz.sqlite' }
-);
+var sequelize = new Sequelize(DB_NAME, user, pwd, {
+    protocol : protocol,
+    dialect  : dialect,
+    host     : host,
+    logging: false,
+    dialectOptions: {ssl: true},
+    storage  : storage,     // Solo SQLite
+    omitNull : true			// Solo PostgreSQL
+});
+
+
+
 
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 exports.Quiz = Quiz;

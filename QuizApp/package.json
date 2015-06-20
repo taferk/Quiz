@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  "description": "EsqueletoExpress",
+  "description": "Aplicaci�n de preguntas",
   "author": {
     "name": "hauregui",
-    "email": ""
+    "email": "taferk@hotmail.com"
   },
   "devDependencies": {
     "sqlite3": "^3.0.8"
@@ -22,6 +22,7 @@
     "express-partials": "^0.3.0",
     "morgan": "~1.3.0",
     "pg": "^4.4.0",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^3.2.0",
     "serve-favicon": "~2.1.3"
   }
