@@ -1,5 +1,18 @@
 ﻿var models = require('../models/models');
 
+exports.load = function (req, res, next, quizId){
+    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+        if (quiz) {
+            req.quiz = quiz.dataValues;
+            next();
+        }
+        else {
+            next(new Error('no existe quizId= ' + quizId));
+        }
+    }).catch(function (error) { next(error); });
+}
+
+
 exports.index = function (req, res) {
     models.Quiz.findAll().then(function (quizes) {
         res.render('quizes/index', { quizes : quizes });
@@ -7,17 +20,9 @@ exports.index = function (req, res) {
 };
 
 exports.show = function (req, res) {
-    models.Quiz.findById(req.params.quizId).then(function (quiz) {
-            res.render('quizes/show', { quiz : quiz.dataValues})
-    })
+    res.render('quizes/show', { quiz : req.quiz })
 };
 
 exports.answer = function (req, res) {
-    models.Quiz.findById(req.params.quizId).then(function (quiz) {
-        if (req.query.respuesta === quiz.respuesta) {
-            res.render('quizes/answer', { quiz : quiz.dataValues, respuesta: 'Correcto' });
-        } else {
-            res.render('quizes/answer', { quiz : quiz.dataValues, respuesta: 'Incorrecto' });
-        }
-    })
+    res.render('quizes/answer', { quiz : req.quiz, respuesta: req.query.respuesta === req.quiz.respuesta?'Correcto':'Incorrecto' });
 };

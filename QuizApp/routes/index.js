@@ -11,6 +11,9 @@ router.get('/author', function (req, res) {
     res.render('creditos', { author: 'Aurelio García' });
 });
 
+
+router.param('quizId', quizController.load);
+
 router.get('/quizes',  quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
