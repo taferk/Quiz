@@ -1,0 +1,11 @@
+﻿<legend>Añadir pregunta</legend>
+<div>
+    <label for="pregunta" class="rem">Pregunta:</label>
+    <input id="pregunta" name="quiz[pregunta]" type="text" placeholder="Texto de la pregunta" value="<%= quiz.pregunta %>" />
+</div>
+<div>
+    <label for="respuesta" class="rem">Respuesta:</label>
+    <input id="respuesta" name="quiz[respuesta]" type="text" placeholder="Respuesta correcta" value="<%= quiz.respuesta %>" />
+</div>
+<input type="submit" value="Guardar" />
+<a href="/quizes">Cancelar</a>
