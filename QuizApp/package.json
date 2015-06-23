@@ -7,7 +7,7 @@
   },
   "description": "Aplicaci�n de preguntas",
   "author": {
-    "name": "hauregui",
+    "name": "Aurelio García",
     "email": "taferk@hotmail.com"
   },
   "devDependencies": {
@@ -25,6 +25,5 @@
     "pg": "^4.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.2.0",
-    "serve-favicon": "~2.1.3"
   }
 }
