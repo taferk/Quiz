@@ -7,5 +7,15 @@
     <label for="respuesta" class="rem">Respuesta:</label>
     <input id="respuesta" name="quiz[respuesta]" type="text" placeholder="Respuesta correcta" value="<%= quiz.respuesta %>" />
 </div>
+<div>
+    <label for="tema" class="rem">Tema:</label>
+    <select id="tema" name="quiz[tema]">
+        <option value="otro" <%= quiz.tema === 'otro'?'selected':''%> >Otro</option>
+        <option value="humanidades" <%= quiz.tema === 'humanidades'?'selected':''%>>Humanidades</option>
+        <option value="ocio" <%= quiz.tema === 'ocio'?'selected':''%>>Ocio</option>
+        <option value="ciencia" <%= quiz.tema === 'ciencia'?'selected':''%>>Ciencia</option>
+        <option value="tecnologia" <%= quiz.tema === 'tecnologia'?'selected':''%>>Tecnología</option>
+    </select>
+</div>
 <input type="submit" value="Guardar" />
 <a href="/quizes">Cancelar</a>

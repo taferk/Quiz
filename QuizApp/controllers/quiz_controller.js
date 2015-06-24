@@ -17,11 +17,11 @@ exports.index = function (req, res) {
     var search = (req.query.search || '').trim().toLowerCase();
     if (search > '') {
         search = '%' + search.replace(' ', '%') + '%';
-        models.Quiz.findAll({ where: ['lower(pregunta) like ?', search], order: 'pregunta' }).then(function (quizes) {
+        models.Quiz.findAll({ where: ['lower(pregunta) like ?', search], order: ['tema','pregunta'] }).then(function (quizes) {
             res.render('quizes/index', { quizes : quizes });
         }).catch(function (error) { next(error); });
     } else {
-        models.Quiz.findAll({order: 'pregunta' }).then(function (quizes) {
+        models.Quiz.findAll({order: ['tema', 'pregunta'] }).then(function (quizes) {
             res.render('quizes/index', { quizes : quizes });
         }).catch(function (error) { next(error); });
     }
@@ -46,7 +46,7 @@ exports.create = function (req, res) {
         if (err) {
             res.render('quizes/new', { quiz: quiz, errors: err.errors })
         } else {
-            quiz.save({ fields: ['pregunta', 'respuesta'] })
+            quiz.save({ fields: ['pregunta', 'respuesta', 'tema'] })
             .then(function () {
                 res.redirect('/quizes');
             }).catch(function (error) { next(error); });
@@ -62,12 +62,13 @@ exports.update = function (req, res){
     var quiz = req.quiz;
     quiz.pregunta = req.body.quiz.pregunta;
     quiz.respuesta = req.body.quiz.respuesta;
+    quiz.tema = req.body.quiz.tema;
 
     quiz.validate().then(function (err) {
         if (err) {
             res.render('quizes/' + quiz.id +'/edit', { quiz: quiz, errors: err.errors })
         } else {
-            quiz.save({ fields: ['pregunta', 'respuesta'] })
+            quiz.save({ fields: ['pregunta', 'respuesta', 'tema'] })
             .then(function () {
                 res.redirect('/quizes');
             }).catch(function (error) { next(error); });

@@ -5,18 +5,28 @@
         <input type="submit" value="Filtrar" />
     </label>
 </form>
-<table>
-    <% var i; for (i=0; i<quizes.length; i++) { %>
-        <tr>
-            <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
-            <td><a href="quizes/<%= quizes[i].id %>/edit">editar</a></td>
-            <td>
-                <form method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
-                    <button type="submit" onclick="return confirm('�Seguro que desea borrar esta pregunta?')">borrar</button>
-                 </form>
-            </td>
-        </tr>
-    <% } %>
-</table>
-
-<a href="/quizes/new"><button type="button">Nueva pregunta</button></a>
+<div class="tables">
+    <table>
+            <tr>
+                <td>Tema</td>
+                <td>Pregunta</td>
+                <td colspan="2">Acciones</td>
+            </tr>
+            <% var i; for (i=0; i
+            <quizes.length; i++) { %>
+                <tr>
+                    <td><%= quizes[i].tema.charAt(0).toUpperCase() + quizes[i].tema.slice(1) %></td>
+                    <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+                    <td><a href="quizes/<%= quizes[i].id %>/edit">Editar</a></td>
+                    <td>
+                        <form id="<%='frmDel' + i%>" method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
+                            <a href="javascript:{}" onclick="if (confirm('¿Seguro que desea borrar esta pregunta?')) document.getElementById('<%='frmDel' + i%>').submit()">Eliminar</a>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+    </table>
+</div>
+<div>
+    <a href="/quizes/new">Añadir nueva pregunta</a>
+</div>
