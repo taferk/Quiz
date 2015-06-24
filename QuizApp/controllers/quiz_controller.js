@@ -66,7 +66,7 @@ exports.update = function (req, res){
 
     quiz.validate().then(function (err) {
         if (err) {
-            res.render('quizes/' + quiz.id +'/edit', { quiz: quiz, errors: err.errors })
+            res.render('quizes/edit', { quiz: quiz, errors: err.errors })
         } else {
             quiz.save({ fields: ['pregunta', 'respuesta', 'tema'] })
             .then(function () {
