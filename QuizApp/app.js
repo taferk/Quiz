@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
+var os = require("os");
 
 var routes = require('./routes/index');
 var app = express();
@@ -42,7 +43,7 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-}
+};
 
 // production error handler
 // no stacktraces leaked to user
@@ -56,3 +57,8 @@ app.use(function (err, req, res, next) {
 
 
 module.exports = app;
+
+
+if (app.get('env') === 'development') {
+    console.log('Aplicación iniciada en la dirección: http://' + os.hostname() + ':' + process.env.port);
+};
