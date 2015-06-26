@@ -27,7 +27,12 @@ var sequelize = new Sequelize(DB_NAME, user, pwd, {
 
 
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
+var Comentario = sequelize.import(path.join(__dirname, 'comentario'));
+Comentario.belongsTo(Quiz, {foreignKey: 'quiz_id'});
+Quiz.hasMany(Comentario, {foreignKey: 'quiz_id'});
+
 exports.Quiz = Quiz;
+exports.Comentario = Comentario;
 
 sequelize.sync().then(function () {
     Quiz.count().then(function (count) {

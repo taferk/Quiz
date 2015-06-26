@@ -28,7 +28,12 @@ exports.index = function (req, res) {
 };
 
 exports.show = function (req, res) {
-    res.render('quizes/show', { quiz : req.quiz })
+    models.Comentario.findAll({where: ['quiz_id = ?', req.params.quizId]}).then(function (comentarios) {
+        req.quiz.Comentarios = comentarios || [];
+        res.render('quizes/show', { quiz : req.quiz })
+    }).catch(function (error) {
+        next(error);
+    });
 };
 
 exports.answer = function (req, res) {

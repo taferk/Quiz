@@ -1,0 +1,12 @@
+<p>Añadir comentario:</p>
+<form method="post" action="/quizes/<%=comentario.quiz_id%>/comentarios/">
+    <%if (errors.length){%>
+      <span id='ErrorMsgs'>Corregir errores: <br/>
+      <% for (var i in errors){%>
+        <span> <%= errors[i].message %></span><br/>
+      <%}%>
+      </span>
+    <%}%>
+    <input type="text" id="texto" name="comentario[texto]" placeholder="comentario" value="" />
+    <button type="submit">Guardar</button>
+</form>
