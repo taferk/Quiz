@@ -37,6 +37,24 @@ app.use(function (req, res, next){
     next();
 })
 
+app.use(function (req, res, next) {
+    if (!req.path.match(/\/login|\/logout/)) {
+        if (req.session.user) {
+            var currentDate = new Date().getTime();
+            var lastAccess = req.session.user.lastAccess || currentDate;
+            var expire = currentDate - (2 * 60 * 1000);
+            if (lastAccess < expire) {
+                var sessionController = require('./controllers/session_controller');
+                sessionController.destroy(req, res, next);
+                return;
+            }
+            req.session.user.lastAccess = currentDate;
+        }
+    }
+    res.locals.session = req.session;
+    next();
+})
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
