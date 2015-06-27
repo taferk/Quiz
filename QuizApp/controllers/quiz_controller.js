@@ -12,7 +12,6 @@ exports.load = function (req, res, next, quizId){
     }).catch(function (error) { next(error); });
 }
 
-
 exports.index = function (req, res) {
     var search = (req.query.search || '').trim().toLowerCase();
     if (search > '') {

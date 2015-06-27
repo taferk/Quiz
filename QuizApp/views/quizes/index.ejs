@@ -17,16 +17,21 @@
                 <tr>
                     <td><%= quizes[i].tema.charAt(0).toUpperCase() + quizes[i].tema.slice(1) %></td>
                     <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+                    <% if (session.user){%>
                     <td><a href="quizes/<%= quizes[i].id %>/edit">Editar</a></td>
                     <td>
                         <form id="<%='frmDel' + i%>" method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
                             <a href="javascript:{}" onclick="if (confirm('¿Seguro que desea borrar esta pregunta?')) document.getElementById('<%='frmDel' + i%>').submit()">Eliminar</a>
                         </form>
                     </td>
+                    <%}%>
                 </tr>
                 <% } %>
     </table>
 </div>
+
+<% if (session.user){%>
 <div>
     <a href="/quizes/new">Añadir nueva pregunta</a>
 </div>
+<% } %>

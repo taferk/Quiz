@@ -25,7 +25,6 @@ var sequelize = new Sequelize(DB_NAME, user, pwd, {
     omitNull : true			// Solo PostgreSQL
 });
 
-
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 var Comentario = sequelize.import(path.join(__dirname, 'comentario'));
 Comentario.belongsTo(Quiz, {foreignKey: 'quiz_id'});
