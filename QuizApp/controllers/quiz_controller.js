@@ -12,7 +12,7 @@ exports.load = function (req, res, next, quizId){
     }).catch(function (error) { next(error); });
 }
 
-exports.index = function (req, res) {
+exports.index = function (req, res, next) {
     var search = (req.query.search || '').trim().toLowerCase();
     if (search > '') {
         search = '%' + search.replace(' ', '%') + '%';
@@ -26,8 +26,8 @@ exports.index = function (req, res) {
     }
 };
 
-exports.show = function (req, res) {
-    models.Comentario.findAll({where: ['quiz_id = ?', req.params.quizId]}).then(function (comentarios) {
+exports.show = function (req, res, next) {
+    models.Comentario.findAll({where: ['quiz_id = ?', req.params.quizId], order: [['id', 'DESC']]}).then(function (comentarios) {
         req.quiz.Comentarios = comentarios || [];
         res.render('quizes/show', { quiz : req.quiz })
     }).catch(function (error) {
@@ -44,7 +44,7 @@ exports.new = function (req, res) {
     res.render('quizes/new', { quiz : quiz, errors: [] });
 };
 
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
     var quiz = models.Quiz.build(req.body.quiz);
     quiz.validate().then(function (err) {
         if (err) {
@@ -58,7 +58,7 @@ exports.create = function (req, res) {
     });
 };
 
-exports.edit = function (req, res){
+exports.edit = function (req, res, next){
     res.render('quizes/edit', { quiz: req.quiz, errors: [] })
 }
 
@@ -80,7 +80,7 @@ exports.update = function (req, res){
     });
 }
 
-exports.delete = function (req, res) {
+exports.delete = function (req, res, next) {
     req.quiz.destroy().then(function () {
         res.redirect('/quizes');
     }).catch(function (error) { next(error); });

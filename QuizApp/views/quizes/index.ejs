@@ -10,7 +10,9 @@
             <tr>
                 <td>Tema</td>
                 <td>Pregunta</td>
+                <% if (session.user){%>
                 <td colspan="2">Acciones</td>
+                <%}%>
             </tr>
             <% var i; for (i=0; i
             <quizes.length; i++) { %>

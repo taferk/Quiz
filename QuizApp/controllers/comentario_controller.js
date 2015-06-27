@@ -18,3 +18,18 @@ exports.create = function (req, res) {
         }
     });
 };
+
+exports.publicar = function (req, res, next) {
+    models.Comentario.findById(req.params.comentarioId).then(function (comentario) {
+        if (comentario) {
+            comentario.publicar = !comentario.publicar; 
+            comentario.save({ fields: ['publicar'] })
+            .then(function () {
+                res.redirect('/quizes/' + req.params.quizId);
+            }).catch(function (error) { next(error); });
+        }
+        else {
+            next(new Error('No existe el comentario Id= ' + req.params.comentarioId));
+        }
+    }).catch(function (error) { next(error); });
+};

@@ -29,8 +29,8 @@ router.get('/quizes/:quizId(\\d+)/edit', sessionController.login, quizController
 router.put('/quizes/:quizId(\\d+)', sessionController.login, quizController.update);
 router.delete('/quizes/:quizId(\\d+)', sessionController.login, quizController.delete);
 
-router.get('/quizes/:quizId(\\d+)/comentarios/new', sessionController.login, comentarioController.new);
-router.post('/quizes/:quizId(\\d+)/comentarios/', sessionController.login, comentarioController.create);
-
+router.get('/quizes/:quizId(\\d+)/comentarios/new', comentarioController.new);
+router.post('/quizes/:quizId(\\d+)/comentarios/', comentarioController.create);
+router.get('/quizes/:quizId(\\d+)/comentarios/:comentarioId(\\d+)/publicar', sessionController.login, comentarioController.publicar);
 
 module.exports = router;
