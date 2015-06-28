@@ -14,7 +14,7 @@ exports.create = function (req, res) {
     var login = req.body.login;
     var password = req.body.password;
     
-    var userController = require('./user_controller');
+    var userController = require('./usuario_controller');
     userController.autenticar(login, password, function (error, user){
         if (error) {
             req.session.errors = [{ message : error.toString() }];
@@ -22,7 +22,7 @@ exports.create = function (req, res) {
             return;
         }
 
-        req.session.user = { id: user.id, username: user.username };
+        req.session.user = user;
         res.redirect(req.session.redir.toString());
     })
 };

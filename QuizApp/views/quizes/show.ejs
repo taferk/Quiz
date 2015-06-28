@@ -12,10 +12,14 @@
         <p>
             - <%= quiz.Comentarios[i].texto%>
             <% if (session.user) {%>
-            <a href="/quizes/<%=quiz.id%>/comentarios/<%=quiz.Comentarios[i].id%>/publicar"><%=quiz.Comentarios[i].publicar?'No publicar':'Publicar'%></a>
+              <% if (session.user.tipo === 0) {%>
+                <a href="/quizes/<%=quiz.id%>/comentarios/<%=quiz.Comentarios[i].id%>/publicar"><%=quiz.Comentarios[i].publicar?'No publicar':'Publicar'%></a>
+              <%}%>
             <%}%>
         </p>
   <%}%>
 <%}%>
 
-<p><a href="/quizes/<%=quiz.id%>/comentarios/new">Nuevo comentario</a></p>
+<% if (session.user) {%>
+    <p><a href="/quizes/<%=quiz.id%>/comentarios/new">Nuevo comentario</a></p>
+<%}%>

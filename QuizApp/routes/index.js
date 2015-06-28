@@ -3,6 +3,8 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var comentarioController = require('../controllers/comentario_controller');
 var sessionController = require('../controllers/session_controller');
+var usuarioController = require('../controllers/usuario_controller');
+var estadisticaController = require('../controllers/estadistica_controller');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -20,6 +22,9 @@ router.get('/login', sessionController.new);
 router.post('/login', sessionController.create);
 router.get('/logout', sessionController.destroy);
 
+router.get('/usuarios/new', usuarioController.new);
+router.post('/usuarios', usuarioController.create);
+
 router.get('/quizes',  quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
@@ -28,9 +33,10 @@ router.post('/quizes', sessionController.login, quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit', sessionController.login, quizController.edit);
 router.put('/quizes/:quizId(\\d+)', sessionController.login, quizController.update);
 router.delete('/quizes/:quizId(\\d+)', sessionController.login, quizController.delete);
+router.get('/quizes/estadisticas', estadisticaController.show);
 
-router.get('/quizes/:quizId(\\d+)/comentarios/new', comentarioController.new);
-router.post('/quizes/:quizId(\\d+)/comentarios/', comentarioController.create);
+router.get('/quizes/:quizId(\\d+)/comentarios/new', sessionController.login, comentarioController.new);
+router.post('/quizes/:quizId(\\d+)/comentarios/', sessionController.login,comentarioController.create);
 router.get('/quizes/:quizId(\\d+)/comentarios/:comentarioId(\\d+)/publicar', sessionController.login, comentarioController.publicar);
 
 module.exports = router;

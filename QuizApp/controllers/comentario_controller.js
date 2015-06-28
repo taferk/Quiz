@@ -5,7 +5,7 @@ exports.new = function (req, res) {
     res.render('comentarios/new', { comentario : comentario, errors: [] });
 };
 
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
     var comentario = models.Comentario.build({ quiz_id: req.params.quizId, texto: req.body.comentario.texto });
     comentario.validate().then(function (err) {
         if (err) {

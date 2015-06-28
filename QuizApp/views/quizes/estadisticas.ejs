@@ -1,0 +1,27 @@
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+              ['Tema', 'Quizes por tema'],
+              <% for (i in datos.qtemas){%>
+          <%=i>0?',':''%>["<%=datos.qtemas[i].tema.charAt(0).toUpperCase() + datos.qtemas[i].tema.slice(1)%>", <%=datos.qtemas[i].dataValues.preguntas%>]
+          <% } %>
+        ]);
+
+        var options = {
+          title: 'Preguntas por temas',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+        chart.draw(data, options);
+      }
+    </script>
+<p><strong>Estadísticas:</strong></p>
+<div>
+    <span><strong>Total preguntas:</strong><%=datos.preguntas%></span>
+    <span><strong>Total comentarios:</strong><%=datos.comentarios%></span>
+    <span><strong>Media (comentarios/pregunta):</strong><%= datos.comentarios / datos.preguntas %></span>
+</div>
+<div id="chart" style="display: block;  margin-left: auto;  margin-right: auto; width: 60%; height: 200px;"></div>

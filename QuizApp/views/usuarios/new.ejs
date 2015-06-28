@@ -1,0 +1,32 @@
+﻿<h2>Login</h2>
+
+<form method='POST' action='/usuarios' onsubmit="getElementById('password').value = CryptoJS.SHA1(getElementById('clave').value)" >
+
+    <div class="field">
+        <label for="nombre">Nombre de usuario:</label><br />
+        <input type="text" id="nombre" name="usuario[nombre]" required placeholder="Nombre" size="50" />
+    </div>
+
+    <div class="field">
+        <label for="clave">Clave:</label><br />
+        <input type="text" id="clave" placeholder="Clave" required size="50" />
+        <input type="hidden" id="password" name="usuario[clave]" />
+    </div>
+
+    <div class="actions">
+        <button name="commit" type="submit">Guardar</button>
+        <a href="/quizes">Cancelar</a>
+    </div>
+
+</form>
+
+<%if (errors.length){%>
+    <div class="errores">
+        <span id="ErrorMsgs">No se pudo dar de alta el usuario por los siguientes motivos:</span>
+        <ul>
+            <% for (var i in errors){%>
+            <li><%= errors[i].message %></></li>
+            <%}%>
+        </ul>
+    </div>
+<%}%>

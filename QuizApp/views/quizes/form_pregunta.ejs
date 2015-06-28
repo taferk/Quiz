@@ -11,9 +11,11 @@
     <label for="tema" class="rem">Tema:</label>
     <select id="tema" name="quiz[tema]">
         <option value="otro" <%= quiz.tema === 'otro'?'selected':''%> >Otro</option>
-        <option value="humanidades" <%= quiz.tema === 'humanidades'?'selected':''%>>Humanidades</option>
-        <option value="ocio" <%= quiz.tema === 'ocio'?'selected':''%>>Ocio</option>
         <option value="ciencia" <%= quiz.tema === 'ciencia'?'selected':''%>>Ciencia</option>
+        <option value="geografia" <%= quiz.tema === 'geografia'?'selected':''%>>Geografía</option>
+        <option value="humanidades" <%= quiz.tema === 'humanidades'?'selected':''%>>Humanidades</option>
+        <option value="matematicas" <%= quiz.tema === 'matematicas'?'selected':''%>>Matemáticas</option>
+        <option value="ocio" <%= quiz.tema === 'ocio'?'selected':''%>>Ocio</option>
         <option value="tecnologia" <%= quiz.tema === 'tecnologia'?'selected':''%>>Tecnología</option>
     </select>
 </div>
