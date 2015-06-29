@@ -1,14 +1,27 @@
-<form method="post" action="/quizes">
-    <% include form_pregunta.ejs %>
-</form>
-
-<%if (errors.length){%>
-    <div class="errores">
-        <span id="ErrorMsgs">Corregir errores:</span>
-        <ul>
-            <% for (var i in errors){%>
-            <li><%= errors[i].message %></></li>
-            <%}%>
-        </ul>
+<div class="row">
+    <%if (errors.length){%>
+    <div class="panel-info">
+        <div class="panel-heading">
+            <span class="panel-title">Corregir errores</span>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <% for (var i in errors){%>
+                <li class="label label-warning"><%= errors[i].message %></></li>
+                <%}%>
+            </ul>
+        </div>
     </div>
-<%}%>
+    <%}%>
+
+    <div class="panel-primary">
+        <div class="panel-heading">
+            <span>Añadir pregunta</span>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="/quizes">
+                <% include form_pregunta.ejs %>
+            </form>
+        </div>
+    </div>
+</div>

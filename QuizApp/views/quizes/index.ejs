@@ -1,39 +1,53 @@
-<form method="get" action="/quizes">
-    <label for="search">
-        Filtrar preguntas por:
-        <input id="search" name="search" type="text" placeholder="Texto a buscar" />
-        <input type="submit" value="Filtrar" />
-    </label>
-</form>
-<div class="tables">
-    <table>
-            <tr>
-                <td>Tema</td>
-                <td>Pregunta</td>
-                <% if (session.user){%>
-                <td colspan="2">Acciones</td>
-                <%}%>
-            </tr>
-            <% var i; for (i=0; i
-            <quizes.length; i++) { %>
-                <tr>
-                    <td><%= quizes[i].tema.charAt(0).toUpperCase() + quizes[i].tema.slice(1) %></td>
-                    <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
-                    <% if (session.user){%>
-                    <td><a href="quizes/<%= quizes[i].id %>/edit">Editar</a></td>
-                    <td>
-                        <form id="<%='frmDel' + i%>" method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
-                            <a href="javascript:{}" onclick="if (confirm('¿Seguro que desea borrar esta pregunta?')) document.getElementById('<%='frmDel' + i%>').submit()">Eliminar</a>
-                        </form>
-                    </td>
-                    <%}%>
-                </tr>
-                <% } %>
-    </table>
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <b>Listado de preguntas</b>
+                <form class="form-inline pull-right" method="get" action="/quizes">
+                    <div class="form-group">
+                        <input id="search" name="search" type="text" placeholder="Texto a buscar" />
+                        <button type="submit" class="btn btn-xs"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tema</th>
+                            <th>Pregunta</th>
+                            <% if (session.user){%>
+                            <th colspan="2">Acciones</th>
+                            <%}%>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% var i; for (i=0; i
+                        <quizes.length; i++) { %>
+                            <tr>
+                                <td><%= quizes[i].tema.charAt(0).toUpperCase() + quizes[i].tema.slice(1) %></td>
+                                <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+                                <% if (session.user){%>
+                                <td><a class="btn btn-default" href="quizes/<%= quizes[i].id %>/edit">Editar</a></td>
+                                <td>
+                                    <form id="<%='frmDel' + i%>" method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
+                                        <a class="btn btn-default" href="javascript:{}" onclick="if (confirm('¿Seguro que desea borrar esta pregunta?')) document.getElementById('<%='frmDel' + i%>').submit()">Eliminar</a>
+                                    </form>
+                                </td>
+                                <%}%>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-<% if (session.user){%>
-<div>
-    <a href="/quizes/new">Añadir nueva pregunta</a>
+    <% if (session.user){%>
+<div class="row center">
+    <a class="btn btn-primary" href="/quizes/new">Añadir nueva pregunta</a>
 </div>
-<% } %>
+    <% } %>

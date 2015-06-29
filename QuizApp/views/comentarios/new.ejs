@@ -1,19 +1,32 @@
-<p>Añadir comentario:</p>
-<form method="post" action="/quizes/<%=comentario.quiz_id%>/comentarios/">
-    <input type="text" id="texto" name="comentario[texto]" placeholder="Comentario" value="" />
-    <div>
-        <button type="submit">Guardar</button>
-        <a href="/quizes">Cancelar</a>
+<div class="row">
+    <%if (errors.length){%>
+    <div class="panel-info">
+        <div class="panel-heading">
+            <span class="panel-title">Corregir errores</span>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <% for (var i in errors){%>
+                <li class="label label-warning"><%= errors[i].message %></></li>
+                <%}%>
+            </ul>
+        </div>
     </div>
-</form>
+    <%}%>
 
-<%if (errors.length){%>
-    <div class="errores">
-        <span id="ErrorMsgs">Corregir errores:</span>
-        <ul>
-            <% for (var i in errors){%>
-            <li><%= errors[i].message %></></li>
-            <%}%>
-        </ul>
+
+    <div class="panel-primary">
+        <div class="panel-heading">
+            <span>Añadir comentario</span>
+        </div>
+        <div class="panel-body">
+            <form class="form" method="post" action="/quizes/<%=comentario.quiz_id%>/comentarios/">
+                <input type="text" id="texto" class="form-control" name="comentario[texto]" placeholder="Comentario" value="" />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-default" href="/quizes">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
-<%}%>
+</div>

@@ -18,10 +18,18 @@
         chart.draw(data, options);
       }
     </script>
-<p><strong>Estadísticas:</strong></p>
-<div>
-    <span><strong>Total preguntas:</strong><%=datos.preguntas%></span>
-    <span><strong>Total comentarios:</strong><%=datos.comentarios%></span>
-    <span><strong>Media (comentarios/pregunta):</strong><%= datos.comentarios / datos.preguntas %></span>
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <p><strong>Estadísticas</strong></p>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4 center"><b>Preguntas</b>: <%=datos.preguntas%></div>
+                <div class="col-md-4 center"><b>Comentarios</b>: <%=datos.comentarios%></div>
+                <div class="col-md-4 center"><b>Media</b> (comentarios/pregunta): <%= datos.comentarios / datos.preguntas %></div>
+            </div>
+        </div>
+        <div id="chart" style="display: block;  margin-left: auto;  margin-right: auto; width: 60%; height: 200px;"></div>
+    </div>
 </div>
-<div id="chart" style="display: block;  margin-left: auto;  margin-right: auto; width: 60%; height: 200px;"></div>

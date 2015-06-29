@@ -1,2 +1,19 @@
-<p><strong><%= respuesta %></strong></p>
-<a href="/quizes/<%= quiz.id %>"> <%= respuesta === 'Correcto'?'Volver a jugar':'Intentarlo otra vez' %></a>
+<% var correcto=respuesta === 'Correcto' %>
+
+<div class="row">
+    <div class="alert <%=correcto?'alert-success':'alert-warning'%>" role="alert">
+        <p>
+            <% if (correcto){%>
+               <strong>¡Bien hecho!</strong> La respuesta es correcta.
+            <% }else{%>
+               <strong>¡Oops!</strong> Inténtalo de nuevo.
+            <%}%>
+        </p>
+    </div>
+    <% if (correcto){%>
+    <a href="/quizes" class="btn btn-default">Más preguntas</a>
+    <% }else{%>
+    <a href="/quizes/<%= quiz.id %>" class="btn btn-default">Intentarlo otra vez</a>
+    <a href="/quizes" class="btn btn-default">Más preguntas</a>
+    <%}%>
+</div>

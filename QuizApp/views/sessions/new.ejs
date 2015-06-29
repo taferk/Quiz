@@ -1,34 +1,39 @@
-﻿<h2>Login</h2>
+﻿<div class="row">
+    <h2>Login</h2>
 
-<form method='POST' action='/login' onsubmit="getElementById('password').value = CryptoJS.SHA1(getElementById('clave').value)" >
-
-    <div class="field">
-        <label for="login">Usuario:</label><br />
-        <input type="text" id="login" required name="login" size="50" />
+    <%if (errors.length){%>
+    <div class="panel-info">
+        <div class="panel-heading">
+            <span class="panel-title">No se pudo iniciar la sesión por los siguientes motivos:</span>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <% for (var i in errors){%>
+                <li class="label label-warning"><%= errors[i].message %></></li>
+                <%}%>
+            </ul>
+        </div>
     </div>
+    <%}%>
 
-    <div class="field">
-        <label for="password">Clave:</label><br />
-        <input type="password" id="clave" required name="clave" size="50" />
-        <input type="hidden" id="password" name="password" />
-    </div>
+    <form class="form"  method='POST' action='/login' onsubmit="getElementById('password').value = CryptoJS.SHA1(getElementById('clave').value)">
 
+        <div class="form-group">
+            <label for="login">Usuario:</label><br />
+            <input type="text" id="login" class="form-control" required placeholder="Nombre del usuario (sensible a capitalización)" name="login" size="50" />
+        </div>
 
+        <div class="form-group">
+            <label for="password">Clave:</label><br />
+            <input type="password" id="clave" class="form-control" required placeholder="Contraseña del usuario" name="clave" size="50" />
+            <input type="hidden" id="password" name="password" />
+        </div>
 
-    <div class="actions">
-        <button name="commit" type="submit">Enviar</button>
-        <a href="/quizes">Cancelar</a>
-    </div>
+        <div class="form-group">
+            <button class="btn-primary btn" name="commit" type="submit">Enviar</button>
+            <a class="btn-default btn" href="/quizes">Cancelar</a>
+        </div>
 
-</form>
+    </form>
 
-<%if (errors.length){%>
-    <div class="errores">
-        <span id="ErrorMsgs">No se pudo iniciar la sesión por los siguientes motivos:</span>
-        <ul>
-            <% for (var i in errors){%>
-            <li><%= errors[i].message %></></li>
-            <%}%>
-        </ul>
-    </div>
-<%}%>
+</div>

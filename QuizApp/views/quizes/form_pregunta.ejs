@@ -1,23 +1,24 @@
-﻿<legend>Añadir pregunta</legend>
-<div>
-    <label for="pregunta" class="rem">Pregunta:</label>
-    <input id="pregunta" name="quiz[pregunta]" type="text" placeholder="Texto de la pregunta" value="<%= quiz.pregunta %>" />
-</div>
-<div>
-    <label for="respuesta" class="rem">Respuesta:</label>
-    <input id="respuesta" name="quiz[respuesta]" type="text" placeholder="Respuesta correcta" value="<%= quiz.respuesta %>" />
-</div>
-<div>
-    <label for="tema" class="rem">Tema:</label>
-    <select id="tema" name="quiz[tema]">
-        <option value="otro" <%= quiz.tema === 'otro'?'selected':''%> >Otro</option>
-        <option value="ciencia" <%= quiz.tema === 'ciencia'?'selected':''%>>Ciencia</option>
-        <option value="geografia" <%= quiz.tema === 'geografia'?'selected':''%>>Geografía</option>
-        <option value="humanidades" <%= quiz.tema === 'humanidades'?'selected':''%>>Humanidades</option>
-        <option value="matematicas" <%= quiz.tema === 'matematicas'?'selected':''%>>Matemáticas</option>
-        <option value="ocio" <%= quiz.tema === 'ocio'?'selected':''%>>Ocio</option>
-        <option value="tecnologia" <%= quiz.tema === 'tecnologia'?'selected':''%>>Tecnología</option>
-    </select>
-</div>
-<input type="submit" value="Guardar" />
-<a href="/quizes">Cancelar</a>
+﻿    <div class="form">
+        <div class="form-group">
+            <label for="pregunta" class="rem">Pregunta:</label>
+            <input id="pregunta" name="quiz[pregunta]" type="text" class="form-control" placeholder="Texto de la pregunta" value="<%= quiz.pregunta %>" />
+        </div>
+        <div class="form-group">
+            <label for="respuesta" class="rem">Respuesta:</label>
+            <input id="respuesta" name="quiz[respuesta]" type="text" class="form-control" placeholder="Respuesta correcta" value="<%= quiz.respuesta %>" />
+        </div>
+        <div class="form-group">
+            <label for="tema" class="rem">Tema:</label>
+            <select id="tema" name="quiz[tema]" class="form-control">
+                <option value="otro" <%= quiz.tema === 'otro'?'selected':''%> >Otro</option>
+                <option value="ciencia" <%= quiz.tema === 'ciencia'?'selected':''%>>Ciencia</option>
+                <option value="geografia" <%= quiz.tema === 'geografia'?'selected':''%>>Geografía</option>
+                <option value="humanidades" <%= quiz.tema === 'humanidades'?'selected':''%>>Humanidades</option>
+                <option value="matematicas" <%= quiz.tema === 'matematicas'?'selected':''%>>Matemáticas</option>
+                <option value="ocio" <%= quiz.tema === 'ocio'?'selected':''%>>Ocio</option>
+                <option value="tecnologia" <%= quiz.tema === 'tecnologia'?'selected':''%>>Tecnología</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Guardar" />
+        <a href="/quizes" class="btn btn-default">Cancelar</a>
+    </div>
